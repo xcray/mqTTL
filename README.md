@@ -22,4 +22,5 @@ Works with multiple BLE Gateways of different types and any kinds of Xiaomi (Mij
 - lock.yaml: Zelkova K1 Smart Lock
 - flora.yaml: HHCCJCY01
 - tmhm.yaml: LYWSD03MMC
+
 *设备did* need to be replaced with correct dids
