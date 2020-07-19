@@ -1,0 +1,92 @@
+sensor:
+  - platform: mqtt
+    name: FATemp
+    icon: 'mdi:thermometer'
+    state_topic: 'mqttl/设备did/4100'
+    device_class: temperature
+    unit_of_measurement: °C
+    value_template: "{{value|int(0,16)/10}}"
+  - platform: mqtt
+    name: FALight
+    icon: 'mdi:white-balance-sunny'
+    state_topic: 'mqttl/设备did/4103'
+    device_class: illuminance
+    unit_of_measurement: lux
+    value_template: "{{value|int(0,16)}}"
+  - platform: mqtt
+    name: FAMois
+    icon: 'mdi:water-percent'
+    state_topic: 'mqttl/设备did/4104'
+    device_class: humidity
+    unit_of_measurement: '%'
+    value_template: "{{value|int(0,16)}}"
+  - platform: mqtt
+    name: FACond
+    icon: 'mdi:flash-circle'
+    state_topic: 'mqttl/设备did/4105'
+    unit_of_measurement: μS/cm
+    value_template: "{{value|int(0,16)}}"
+  - platform: mqtt
+    name: FBTemp
+    icon: 'mdi:thermometer'
+    state_topic: 'mqttl/设备did/4100'
+    device_class: temperature
+    unit_of_measurement: °C
+    value_template: "{{value|int(0,16)/10}}"
+  - platform: mqtt
+    name: FBLight
+    icon: 'mdi:white-balance-sunny'
+    state_topic: 'mqttl/设备did/4103'
+    device_class: illuminance
+    unit_of_measurement: lux
+    value_template: "{{value|int(0,16)}}"
+  - platform: mqtt
+    name: FBMois
+    icon: 'mdi:water-percent'
+    state_topic: 'mqttl/设备did/4104'
+    device_class: humidity
+    unit_of_measurement: '%'
+    value_template: "{{value|int(0,16)}}"
+  - platform: mqtt
+    name: FBCond
+    icon: 'mdi:flash-circle'
+    state_topic: 'mqttl/设备did/4105'
+    unit_of_measurement: μS/cm
+    value_template: "{{value|int(0,16)}}"
+homeassistant:
+  customize:
+    sensor.FATemp:
+      friendly_name: 绿萝温度
+    sensor.FAMois:
+      friendly_name: 绿萝湿度
+    sensor.FALight:
+      friendly_name: 绿萝光照
+    sensor.FACond:
+      friendly_name: 绿萝肥力
+    sensor.FBTemp:
+      friendly_name: 南瓜温度
+    sensor.FBMois:
+      friendly_name: 南瓜湿度
+    sensor.FBLight:
+      friendly_name: 南瓜光照
+    sensor.FBCond:
+      friendly_name: 南瓜肥力
+group:
+  MiFloraA:
+    icon: 'mdi:graph'
+    all: true
+    name: 绿萝
+    entities:
+      - sensor.FATemp
+      - sensor.FAMois
+      - sensor.FALight
+      - sensor.FACond
+  MiFloraB:
+    icon: 'mdi:pumpkin'
+    all: true
+    name: 南瓜
+    entities:
+      - sensor.FBTemp
+      - sensor.FBMois
+      - sensor.FBLight
+      - sensor.FBCond

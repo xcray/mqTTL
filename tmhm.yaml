@@ -1,0 +1,28 @@
+sensor:
+  - platform: mqtt
+    name: btTemp
+    icon: 'mdi:thermometer'
+    state_topic: 'mqttl/设备did/4100'
+    device_class: temperature
+    unit_of_measurement: °C
+    value_template: "{{value|int(0,16)/10}}"
+  - platform: mqtt
+    name: btHumi
+    icon: 'mdi:water-percent'
+    state_topic: 'mqttl/设备did/4102'
+    device_class: humidity
+    unit_of_measurement: '%'
+    value_template: "{{value|int(0,16)/10}}"
+  - platform: mqtt
+    name: btBatt
+    icon: 'mdi:battery-charging'
+    state_topic: 'mqttl/设备did/4106'
+    value_template: "{{value|int(0,16)}}"
+homeassistant:
+  customize:
+    sensor.btTemp:
+      friendly_name: 蓝牙温度
+    sensor.btHumi:
+      friendly_name: 蓝牙湿度
+    sensor.btBatt:
+      friendly_name: 蓝牙电量

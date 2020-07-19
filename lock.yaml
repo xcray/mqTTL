@@ -1,0 +1,81 @@
+sensor:
+  - platform: mqtt
+    name: Jvshu
+    icon: 'mdi:door-closed-lock'
+    state_topic: 'mqttl/设备did/4110'
+    value_template: >-
+       {% if value == '00' %}
+         门未关！
+       {% elif value == '01' %}
+         已关，未闩
+       {% elif value == '02' %}
+         已上闩
+       {% endif %}
+  - platform: mqtt
+    name: LockBatt
+    icon: 'mdi:battery-80-bluetooth'
+    state_topic: 'mqttl/设备did/4106'
+    value_template: "{{ value[8:10]|int(0,16) }}"
+    unit_of_measurement: '%'
+  - platform: mqtt
+    name: BattDate
+    icon: 'mdi:update'
+    state_topic: 'mqttl/设备did/4106'
+    value_template: "{{ value[0:8]|int(0,16)|timestamp_custom('%Y-%m-%d') }}"
+  - platform: mqtt
+    name: DoorEvt
+    icon: 'mdi:door-open'
+    state_topic: 'mqttl/设备did/7'
+    value_template: >-
+       {% if value == '02' %}
+         门超时未关！
+       {% endif %}
+  - platform: mqtt
+    name: BattDate
+    icon: 'mdi:update'
+    state_topic: 'mqttl/设备did/7'
+    value_template: "{{ value[0:8]|int(0,16)|timestamp_local }}"
+  - platform: mqtt
+    name: LockOpera
+    icon: 'mdi:lock-smart'
+    state_topic: 'mqttl/设备did/5'
+    value_template: >-
+       {% if value[16:20] == '0200' %}
+         指纹
+       {% elif value[16:20] == '0100' %}
+         密码
+       {% elif value[16:20] == '0000' %}
+         蓝牙
+       {% endif %}
+  - platform: mqtt
+    name: KeyID
+    icon: 'mdi:human-handsdown'
+    state_topic: 'mqttl/设备did/5'
+    value_template: "{{ value[8:16] }}"
+  - platform: mqtt
+    name: OpTime
+    icon: 'mdi:clock-in'
+    state_topic: 'mqttl/设备did/5'
+    value_template: "{{  value[0:8]|int(0,16)|timestamp_local }}"
+homeassistant:
+  customize:
+    sensor.Jvshu:
+      friendly_name: 大门把手
+    sensor.LockOpera:
+      friendly_name: 上次开锁
+    sensor.OpTime:
+      friendly_name: 开锁时间
+    sensor.LockBatt:
+      friendly_name: 门锁电量
+    sensor.BattDate:
+      friendly_name: 电量报告日期
+group:
+  zelkova_lock:
+    icon: 'mdi:lock'
+    all: true
+    name: 榉树门锁
+    entities:
+      - sensor.Jvshu
+      - sensor.LockOpera
+      - sensor.KeyID
+      - sensor.OpTime
