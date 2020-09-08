@@ -1,4 +1,8 @@
 # mqttl
+https://bbs.hassbian.com/thread-10434-1-1.html
+
+米家蓝牙设备接入HA/NR的最佳方案，同时支持多个蓝牙网关、任意蓝牙设备（只要能连接蓝牙网关），通用固件不用自己编译，含配网、OTA等功能。
+
 Integrate all types of Xiaomi (Mijia) BLE devices into Home Assistant, by relaying messages from Gateway's TTL to MQTT, running on ESP-01S (ESP8266).
 
 Frok from https://github.com/killadm/LOCK2MQTT, thks to killadm!
